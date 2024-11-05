@@ -44,7 +44,7 @@ const getTimePreferenceLabel = (preference: TimePreference) => {
     'any': 'Any',
     'morning': 'AM',
     'morning-early-evening': 'AM/EPM',
-    'morning-late-evening': 'AM/LPM'
+    'morning-late-evening': 'AM/LPM',
     'early-evening': 'EPM',
     'early-late-evening': 'EPM/LPM',
     'late-evening': 'LPM'
