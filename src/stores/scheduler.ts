@@ -57,11 +57,11 @@ export const useSchedulerStore = defineStore("scheduler", () => {
     }
   };
 
-  const addRacer = async (name: string) => {
+  const addRacer = async (name: string, zwift_power_profile?: string) => {
     try {
       const { data, error } = await supabase
         .from('racers')
-        .insert([{ name }])
+        .insert([{ name, zwift_power_profile }])
         .select();
       
       if (error) throw error;
@@ -69,6 +69,36 @@ export const useSchedulerStore = defineStore("scheduler", () => {
       return data[0];
     } catch (err) {
       console.error("Error adding racer:", err);
+      throw err;
+    }
+  };
+
+  const updateRacerName = async (id: number, name: string) => {
+    try {
+      const { error } = await supabase
+        .from('racers')
+        .update({ name })
+        .eq('id', id);
+      
+      if (error) throw error;
+      await fetchRacers();
+    } catch (err) {
+      console.error("Error updating racer name:", err);
+      throw err;
+    }
+  };
+
+  const updateRacerZwiftProfile = async (id: number, zwift_power_profile: string) => {
+    try {
+      const { error } = await supabase
+        .from('racers')
+        .update({ zwift_power_profile })
+        .eq('id', id);
+      
+      if (error) throw error;
+      await fetchRacers();
+    } catch (err) {
+      console.error("Error updating racer Zwift profile:", err);
       throw err;
     }
   };
@@ -268,6 +298,8 @@ export const useSchedulerStore = defineStore("scheduler", () => {
     fetchRaces,
     fetchRacerAvailability,
     addRacer,
+    updateRacerName,
+    updateRacerZwiftProfile,
     deleteRacer,
     addRace,
     updateRace,
