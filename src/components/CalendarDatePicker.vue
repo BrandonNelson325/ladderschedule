@@ -20,7 +20,7 @@ const timePreferences: { value: TimePreference; label: string }[] = [
   { value: 'morning-early-evening', label: 'Morning/Early Evening' },
   { value: 'morning-late-evening', label: 'Morning/Late Evening' },
   { value: 'early-evening', label: 'Early Evening' },
-  { value: 'early-late-evening', label: 'Early/Late Evening' }
+  { value: 'early-late-evening', label: 'Early/Late Evening' },
   { value: 'late-evening', label: 'Late Evening' }
 ];
 
