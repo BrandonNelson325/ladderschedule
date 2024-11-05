@@ -17,8 +17,11 @@ const showTimePreference = ref<string | null>(null);
 const timePreferences: { value: TimePreference; label: string }[] = [
   { value: 'any', label: 'Any Time' },
   { value: 'morning', label: 'Morning' },
+  { value: 'morning-early-evening', label: 'Morning/Early Evening' },
+  { value: 'morning-late-evening', label: 'Morning/Late Evening' },
   { value: 'early-evening', label: 'Early Evening' },
-  { value: 'evening', label: 'Evening' }
+  { value: 'early-late-evening', label: 'Early/Late Evening' }
+  { value: 'late-evening', label: 'Late Evening' }
 ];
 
 // Initialize with existing dates, filtering out past dates
