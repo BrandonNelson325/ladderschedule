@@ -41,13 +41,13 @@ const getRacerName = (racerId: number) => {
 
 const getTimePreferenceLabel = (preference: TimePreference) => {
   const labels = {
-    'any': 'A',
-    'morning': 'M',
-    'morning-early-evening': 'M,EE',
-    'morning-late-evening': 'M,LE'
-    'early-evening': 'EE',
-    'early-late-evening': 'E,LE',
-    'late-evening': 'LE'
+    'any': 'Any',
+    'morning': 'AM',
+    'morning-early-evening': 'AM/EPM',
+    'morning-late-evening': 'AM/LPM'
+    'early-evening': 'EPM',
+    'early-late-evening': 'EPM/LPM',
+    'late-evening': 'LPM'
   };
   return labels[preference] || preference;
 };
