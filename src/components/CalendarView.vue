@@ -43,8 +43,11 @@ const getTimePreferenceLabel = (preference: TimePreference) => {
   const labels = {
     'any': 'A',
     'morning': 'M',
+    'morning-early-evening': 'M,EE',
+    'morning-late-evening': 'M,LE'
     'early-evening': 'EE',
-    'evening': 'E'
+    'early-late-evening': 'E,LE',
+    'late-evening': 'LE'
   };
   return labels[preference] || preference;
 };
