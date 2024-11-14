@@ -77,8 +77,9 @@ store.fetchRacerAvailability();
       >
         ←
       </button>
-      <h2 class="text-xl font-bold">
-        {{ formatDisplayDate(currentWeekStart) }} - {{ formatDisplayDate(weekDays[6]) }}
+      <h2 class="text-xl font-bold text-center">
+        <span class="hidden sm:inline">{{ formatDisplayDate(currentWeekStart) }} - {{ formatDisplayDate(weekDays[6]) }}</span>
+        <span class="sm:hidden">{{ format(currentWeekStart, 'MMM d') }} - {{ format(weekDays[6], 'MMM d') }}</span>
       </h2>
       <button 
         @click="nextWeek"
@@ -89,39 +90,39 @@ store.fetchRacerAvailability();
     </div>
 
     <!-- Calendar Grid -->
-    <div class="grid grid-cols-7 gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
       <div 
         v-for="day in weekDays" 
         :key="formatDate(day)"
-        class="min-h-[300px] p-4 bg-white rounded-lg shadow"
+        class="min-h-[200px] sm:min-h-[250px] p-3 sm:p-4 bg-white rounded-lg shadow"
       >
-        <div class="font-semibold mb-2">{{ formatDisplayDate(day) }}</div>
+        <div class="font-semibold mb-2 text-sm sm:text-base">{{ formatDisplayDate(day) }}</div>
         
         <!-- Race Details -->
-        <div v-if="store.getRaceForDate(formatDate(day))" class="mb-4 p-2 bg-green-100 rounded">
+        <div v-if="store.getRaceForDate(formatDate(day))" class="mb-3 p-2 bg-green-100 rounded text-sm">
           <div class="font-medium">
             {{ store.getRaceForDate(formatDate(day)).name }}
           </div>
-          <div class="text-sm text-gray-600">
+          <div class="text-xs text-gray-600">
             {{ store.getLocalTime(store.getRaceForDate(formatDate(day)).datetime) }}
           </div>
           <div v-if="store.getRaceForDate(formatDate(day)).signup_url" class="mt-1">
             <a 
               :href="store.getRaceForDate(formatDate(day)).signup_url"
               target="_blank"
-              class="text-blue-500 hover:text-blue-700 text-sm"
+              class="text-blue-500 hover:text-blue-700 text-xs"
             >
               Sign Up
             </a>
           </div>
           <!-- Assigned Racers -->
           <div class="mt-2">
-            <div class="text-sm font-medium text-gray-700">Assigned Racers:</div>
-            <div class="text-sm text-gray-600 space-y-1">
+            <div class="text-xs font-medium text-gray-700">Assigned Racers:</div>
+            <div class="text-xs text-gray-600 space-y-1">
               <div 
                 v-for="racerId in store.getRaceForDate(formatDate(day)).assigned_racers" 
                 :key="racerId"
-                class="pl-2"
+                class="pl-2 truncate"
               >
                 {{ getRacerName(racerId) }}
               </div>
@@ -132,23 +133,23 @@ store.fetchRacerAvailability();
           </div>
           <button
             @click="selectedRace = store.getRaceForDate(formatDate(day))"
-            class="mt-2 text-sm text-blue-600 hover:text-blue-800"
+            class="mt-2 text-xs text-blue-600 hover:text-blue-800"
           >
             Edit Race
           </button>
         </div>
 
         <!-- Available Racers -->
-        <div class="text-sm">
-          <div v-if="store.getRacersForDate(formatDate(day)).length > 0" class="mb-4 p-2 bg-amber-100 rounded">
+        <div class="text-xs sm:text-sm">
+          <div v-if="store.getRacersForDate(formatDate(day)).length > 0" class="mb-3 p-2 bg-amber-100 rounded">
             <div class="font-medium mb-1">Available Racers:</div>
             <div 
               v-for="racer in store.getRacersForDate(formatDate(day))"
               :key="racer.id"
               class="text-gray-600 flex justify-between items-center py-1"
             >
-              <span>{{ racer.name }}</span>
-              <span class="text-xs bg-amber-200 px-2 py-0.5 rounded font-mono">
+              <span class="truncate mr-1">{{ racer.name }}</span>
+              <span class="text-[10px] sm:text-xs bg-amber-200 px-1.5 py-0.5 rounded font-mono whitespace-nowrap">
                 {{ getTimePreferenceLabel(racer.timePreference) }}
               </span>
             </div>
